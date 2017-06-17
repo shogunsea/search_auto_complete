@@ -15,7 +15,6 @@ app.use(compression());
 app.use(express.static(publicPath, httpCachingOptions));
 
 app.get('/', function(req, res) {
-
   const indexFile = path.join(__dirname, './index.html');
   res.sendFile(indexFile);
 });

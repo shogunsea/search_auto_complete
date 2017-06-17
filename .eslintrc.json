@@ -1,0 +1,16 @@
+{
+ "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": ["eslint:recommended", "google"],
+  "rules": {
+    "no-console": "off",
+    "max-len": [2, 100, 4, { "ignoreStrings": true }]
+  }
+}

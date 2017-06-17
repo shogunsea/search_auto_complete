@@ -285,7 +285,7 @@ const bindSearchEvents = function(inputElem, resultsElem, dataHash, previousInpu
   });
 
   inputElem.addEventListener('keyup', function(event) {
-    if(actionIsDispatchable(event)) {
+    if (actionIsDispatchable(event)) {
       return dispatchKeyAction(event, inputElem, previousInput, resultsElem);
     }
 
@@ -341,7 +341,6 @@ const fetchFromTwitterAPI = function() {
       };
 
       req.send();
-
     });
   };
 
@@ -377,7 +376,7 @@ const getDataHash = function(currentContext = 'html') {
       return {dataSet, currentContext: 'twitter'};
     }).catch((e) => {
       console.warn(e);
-    });;
+    });
   }
 
   return new Promise((resolve, reject) => {
@@ -433,5 +432,5 @@ if (typeof module != 'undefined') {
     isSelectAction,
     toggleContextItems,
     toggleContextSelectList,
-  }
+  };
 }

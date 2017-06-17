@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "./node_modules/eslint/bin/eslint.js --quiet --color ./src/**/*.js ./src/*.js; exit 0",
+    "lintfix": "./node_modules/eslint/bin/eslint.js --quiet --color --fix ./src/**/*.js ./src/*.js; exit 0",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon -e js --watch . index.js"
   },
@@ -25,6 +27,8 @@
   "homepage": "https://github.com/shogunsea/search_auto_complete#readme",
   "devDependencies": {
     "chai": "^4.0.2",
+    "eslint": "^4.0.0",
+    "eslint-config-google": "^0.8.0",
     "mocha": "^3.4.2"
   },
   "dependencies": {

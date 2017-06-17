@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Complete</title>
+  <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+  <div class="container">
+    <form id="search_form" autocomplete="off">
+      <div id="search_container">
+        <input id="search_input" name="search_box" placeholder="Search here...">
+        <div id="context_container" tabindex="-1">
+          <span id="current_context">
+            HTML terms
+          </span>
+          <ul id="context_list">
+            <li class="context-item active" data-plain-text="HTML terms" data-context="html">
+              <span>HTML terms</span>
+            </li>
+            <li class="context-item" data-plain-text="Nodejs terms" data-context="node">
+              <span>Nodejs terms</span>
+            </li>
+            <li class="context-item" data-plain-text="Design Pattern" data-context="pattern">
+              <span>Design Patterns</span>
+            </li>
+            <li class="context-item" data-plain-text="Twitter Trends" data-context="twitter">
+              <span>Twitter Trends</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      </input>
+      <ul id="search_results">
+      </ul>
+    </form>
+  </div>
+  <script type="text/javascript" src="main.js" async></script>
+</body>
+</html>

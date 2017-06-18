@@ -1,6 +1,6 @@
 # search_auto_complete
 
-Live Demo [here](http://shogunsea/playground/auto_complete/)
+Live Demo [here](http://shogunsea.com/playground/auto_complete/)
 
 
 ### Features

@@ -82,14 +82,21 @@ body {
     & .result-text {
       align-self: flex-start;
       margin-right: auto;
+      white-space: nowrap;
+      width: 80%;
+      overflow: auto;
+      text-overflow: ellipsis;
     }
 
     & .external-link {
       width: 1em;
       align-self: flex-end;
       margin-left: auto;
+      margin-right: 0.5em;
+      cursor: ne-resize;
 
       & a {
+        cursor: inherit;
         text-decoration: none;
       }
     }
@@ -132,7 +139,6 @@ body {
     background: no-repeat 100%;
     background-size: 36px 10px;
     background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgwIiBoZWlnaHQ9IjEzMCIgdmlld0JveD0iMCAwIDI0IDEzIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0xMi43MSAxMi43MDZMMjMuNzA2IDEuNzEyYTEuMDAzIDEuMDAzIDAgMCAwLTEuNDItMS40MThMMTIgMTAuNTc5IDEuNzEzLjI5NGExLjAwNCAxLjAwNCAwIDAgMC0xLjQyIDEuNDE4TDExLjI5IDEyLjcwNmExLjAwMyAxLjAwMyAwIDAgMCAxLjQyIDB6IiBmaWxsPSIjNTNBMzE4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg0K");
-
     #context_container.active & {
       transform: rotate(180deg);
     }

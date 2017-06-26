@@ -1,13 +1,13 @@
 {
   "name": "search_auto_complete",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/eslint/bin/eslint.js --quiet --color ./src/**/*.js ./src/*.js; exit 0",
     "lintfix": "./node_modules/eslint/bin/eslint.js --quiet --color --fix ./src/**/*.js ./src/*.js; exit 0",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon -e js --watch . index.js"
+    "dev": "nodemon -e js --watch . ./src/server.js"
   },
   "repository": {
     "type": "git",

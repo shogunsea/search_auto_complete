@@ -206,13 +206,11 @@ const activateResultListItem = function(resultContainer, searchInputElem, previo
   const resultItems = document.querySelectorAll('.result-item');
 
   for (let i = 0; i < resultItems.length; i++) {
-    const resultItem =resultItems[i];
+    const resultItem = resultItems[i];
 
     resultItem.addEventListener('mouseenter', function(event) {
       const target = event.currentTarget;
       const plainText = target.getAttribute('data-plain-text');
-      // const containsLink = target.getAttribute('data-url');
-
       const resultItems = document.querySelectorAll('.result-item');
       const resultLen = resultItems.length;
 
@@ -222,13 +220,17 @@ const activateResultListItem = function(resultContainer, searchInputElem, previo
       }
 
       searchInputElem.value = plainText;
-      // // TODO: figure out how to udpate the link here
-      // const div = document.createElement('div')
-      // div.innerHTML = `<a href="/2049">🔎</a>`;
-      // searchInputElem.appendChild(div);
       target.classList.add('highlight');
     });
 
+    resultItem.addEventListener('click', function(event) {
+      clearResult(resultContainer);
+    });
+
+    resultItem.addEventListener('touchend', function(event) {
+      clearResult(resultContainer);
+    });
+    // *** Element is selcted because mouseleave event won't be triggered! ***
     resultItem.addEventListener('mouseleave', function(event) {
       searchInputElem.value = previousInput.value;
     });
@@ -275,8 +277,6 @@ const bindSearchEvents = function(inputElem, resultsElem, dataHash, previousInpu
 
   inputElem.addEventListener('focusout', function(event) {
     inputElem.classList.remove('active');
-    // Comment out this line to preserve result list when focus out.
-    clearResult(resultsElem);
   });
 
   // prevent the form submition when pressing enter key

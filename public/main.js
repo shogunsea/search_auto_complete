@@ -114,7 +114,6 @@ const clearResult = function(resultContainer) {
       resultContainer.classList.remove('active');
       resultContainer.innerHTML = '';
   }, 100);
-
 };
 
 // not clearing innerHTML since dropdown list items
@@ -207,13 +206,11 @@ const activateResultListItem = function(resultContainer, searchInputElem, previo
   const resultItems = document.querySelectorAll('.result-item');
 
   for (let i = 0; i < resultItems.length; i++) {
-    const resultItem =resultItems[i];
+    const resultItem = resultItems[i];
 
     resultItem.addEventListener('mouseenter', function(event) {
       const target = event.currentTarget;
       const plainText = target.getAttribute('data-plain-text');
-      // const containsLink = target.getAttribute('data-url');
-
       const resultItems = document.querySelectorAll('.result-item');
       const resultLen = resultItems.length;
 
@@ -223,13 +220,17 @@ const activateResultListItem = function(resultContainer, searchInputElem, previo
       }
 
       searchInputElem.value = plainText;
-      // // TODO: figure out how to udpate the link here
-      // const div = document.createElement('div')
-      // div.innerHTML = `<a href="/2049">🔎</a>`;
-      // searchInputElem.appendChild(div);
       target.classList.add('highlight');
     });
 
+    resultItem.addEventListener('click', function(event) {
+      clearResult(resultContainer);
+    });
+
+    resultItem.addEventListener('touchend', function(event) {
+      clearResult(resultContainer);
+    });
+    // *** Element is selcted because mouseleave event won't be triggered! ***
     resultItem.addEventListener('mouseleave', function(event) {
       searchInputElem.value = previousInput.value;
     });
@@ -276,8 +277,6 @@ const bindSearchEvents = function(inputElem, resultsElem, dataHash, previousInpu
 
   inputElem.addEventListener('focusout', function(event) {
     inputElem.classList.remove('active');
-    // Comment out this line to preserve result list when focus out.
-    clearResult(resultsElem);
   });
 
   // prevent the form submition when pressing enter key
@@ -353,60 +352,60 @@ const fetchFromTwitterAPI = function() {
 const getHtmlCssTerms = function() {
   const data = [
     {
-      "name": "element",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML",
+      'name': 'element',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML',
     },
     {
-      "name": "border",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/border",
+      'name': 'border',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/border',
     },
     {
-      "name": "border-radius",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius",
+      'name': 'border-radius',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius',
     },
     {
-      "name": "background",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/background",
+      'name': 'background',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/background',
     },
     {
-      "name": "body",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/body",
+      'name': 'body',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/body',
     },
     {
-      "name": "padding",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/padding",
+      'name': 'padding',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/padding',
     },
     {
-      "name": "margin",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/margin",
+      'name': 'margin',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/margin',
     },
     {
-      "name": "position",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/position",
+      'name': 'position',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/position',
     },
     {
-      "name": "display",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/display",
+      'name': 'display',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/display',
     },
     {
-      "name": "float",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/float",
+      'name': 'float',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/float',
     },
     {
-      "name": "flex",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/flex",
+      'name': 'flex',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/flex',
     },
     {
-      "name": "block formatting context",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context",
+      'name': 'block formatting context',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context',
     },
     {
-      "name": "document",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Document",
+      'name': 'document',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/API/Document',
     },
     {
-      "name": "dom tree",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Using_the_W3C_DOM_Level_1_Core",
+      'name': 'dom tree',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Using_the_W3C_DOM_Level_1_Core',
     },
   ];
 
@@ -416,36 +415,36 @@ const getHtmlCssTerms = function() {
 const getNodeTerms = function() {
   const data = [
     {
-      "name": "socket",
-      "url": "https://en.wikipedia.org/wiki/Network_socket",
+      'name': 'socket',
+      'url': 'https://en.wikipedia.org/wiki/Network_socket',
     },
     {
-      "name": "module",
-      "url": "https://nodejs.org/api/modules.html#modules_modules",
+      'name': 'module',
+      'url': 'https://nodejs.org/api/modules.html#modules_modules',
     },
     {
-      "name": "io",
-      "url": "http://www.onlamp.com/pub/a/python/2004/02/12/advanced_nio.html",
+      'name': 'io',
+      'url': 'http://www.onlamp.com/pub/a/python/2004/02/12/advanced_nio.html',
     },
     {
-      "name": "blocking",
-      "url": "https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/",
+      'name': 'blocking',
+      'url': 'https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/',
     },
     {
-      "name": "non-blocking",
-      "url": "https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/",
+      'name': 'non-blocking',
+      'url': 'https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/',
     },
     {
-      "name": "v8",
-      "url": "https://en.wikipedia.org/wiki/Chrome_V8",
+      'name': 'v8',
+      'url': 'https://en.wikipedia.org/wiki/Chrome_V8',
     },
     {
-      "name": "file system",
-      "url": "https://nodejs.org/api/fs.html#fs_file_system",
+      'name': 'file system',
+      'url': 'https://nodejs.org/api/fs.html#fs_file_system',
     },
     {
-      "name": "request",
-      "url": "https://nodejs.org/api/http.html#http_class_http_clientrequest",
+      'name': 'request',
+      'url': 'https://nodejs.org/api/http.html#http_class_http_clientrequest',
     },
   ];
   return data;
@@ -454,24 +453,24 @@ const getNodeTerms = function() {
 const getDesignPatternTerms = function() {
   const data = [
     {
-      "name": "factory",
-      "url": "https://sourcemaking.com/design_patterns/factory_method",
+      'name': 'factory',
+      'url': 'https://sourcemaking.com/design_patterns/factory_method',
     },
     {
-      "name": "singleton",
-      "url": "https://sourcemaking.com/design_patterns/singleton",
+      'name': 'singleton',
+      'url': 'https://sourcemaking.com/design_patterns/singleton',
     },
     {
-      "name": "observor",
-      "url": "https://sourcemaking.com/design_patterns/observer",
+      'name': 'observor',
+      'url': 'https://sourcemaking.com/design_patterns/observer',
     },
     {
-      "name": "decorator",
-      "url": "https://sourcemaking.com/design_patterns/decorator",
+      'name': 'decorator',
+      'url': 'https://sourcemaking.com/design_patterns/decorator',
     },
     {
-      "name": "prototype",
-      "url": "https://sourcemaking.com/design_patterns/prototype",
+      'name': 'prototype',
+      'url': 'https://sourcemaking.com/design_patterns/prototype',
     },
   ];
   return data;
@@ -481,7 +480,7 @@ const getDesignPatternTerms = function() {
 const getDataHash = function(currentContext = 'html') {
   const htmlTerms = getHtmlCssTerms();
   const nodejsTerms = getNodeTerms();
-  debugger
+
   const designPatterns = getDesignPatternTerms();
 
   const dataSet = {

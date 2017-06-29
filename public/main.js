@@ -227,9 +227,6 @@ const activateResultListItem = function(resultContainer, searchInputElem, previo
       clearResult(resultContainer);
     });
 
-    resultItem.addEventListener('touchend', function(event) {
-      clearResult(resultContainer);
-    });
     // *** Element is selcted because mouseleave event won't be triggered! ***
     resultItem.addEventListener('mouseleave', function(event) {
       searchInputElem.value = previousInput.value;

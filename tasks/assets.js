@@ -6,9 +6,9 @@ const rename = require('gulp-rename');
 const del = require('del');
 const runSequence = require('run-sequence');
 const uglifycss = require('gulp-uglifycss');
+const {execSync} = require('child_process');
 
-// images and js files only. style files(scss) are handled by 'sass' task
-const assetsPathPattern = 'src/**/frontend/*.{js,ico,png}';
+const imgPattern = 'src/**/frontend/*.{ico,png}';
 const publicPath = './public';
 
 gulp.task('assets:clean', 'Clean up public folder', function() {
@@ -29,23 +29,34 @@ gulp.task('assets:sass', 'Compile sass into css', function() {
       'uglyComments': true,
     }))
     .pipe(gulp.dest('./public'));
-});
+  }
+);
 
-gulp.task('assets:move-js-img',
-  'Recursively move js and image files from each widget to public directory.',
+gulp.task('assets:move-img',
+  'Recursively move image files from each widget to public directory.',
   () => {
-  return gulp.src(assetsPathPattern)
+  return gulp.src(imgPattern)
       .pipe(rename((path) => {
         path.dirname = path.dirname.replace('frontend', '');
       }))
       .pipe(gulp.dest('./public'));
-});
+  }
+);
+
+gulp.task('assets:js',
+  'Fire up webpack for js building',
+  () => {
+    const webpackCommand = 'webpack'
+    execSync(webpackCommand);
+  }
+);
 
 gulp.task('assets', function() {
   return runSequence(
     'assets:clean',
     'assets:sass',
-    'assets:move-js-img',
+    'assets:js',
+    'assets:move-img',
     function(error) {
       if (error) {
         console.log(error.message);
@@ -53,4 +64,5 @@ gulp.task('assets', function() {
         console.log('ASSETS FINISHED SUCCESSFULLY');
       }
     });
-});
+  }
+);

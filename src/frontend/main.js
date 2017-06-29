@@ -5,6 +5,10 @@
 
 'use strict';
 
+const getHtmlCssTerms = require('./data_store/HTMLCSS');
+const getNodeTerms = require('./data_store/node');
+const getDesignPatternTerms = require('./data_store/designPattern');
+
 const dispatchKeyAction = function(event, inputElem, previousInput, resultContainer) {
   if (isNavAction(event)) {
     return handleNavAction(event, inputElem, previousInput);
@@ -346,138 +350,10 @@ const fetchFromTwitterAPI = function() {
   return makeGETRequest('/twitter');
 };
 
-const getHtmlCssTerms = function() {
-  const data = [
-    {
-      'name': 'element',
-      'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML',
-    },
-    {
-      'name': 'border',
-      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/border',
-    },
-    {
-      'name': 'border-radius',
-      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius',
-    },
-    {
-      'name': 'background',
-      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/background',
-    },
-    {
-      'name': 'body',
-      'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/body',
-    },
-    {
-      'name': 'padding',
-      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/padding',
-    },
-    {
-      'name': 'margin',
-      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/margin',
-    },
-    {
-      'name': 'position',
-      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/position',
-    },
-    {
-      'name': 'display',
-      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/display',
-    },
-    {
-      'name': 'float',
-      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/float',
-    },
-    {
-      'name': 'flex',
-      'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS/flex',
-    },
-    {
-      'name': 'block formatting context',
-      'url': 'https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context',
-    },
-    {
-      'name': 'document',
-      'url': 'https://developer.mozilla.org/en-US/docs/Web/API/Document',
-    },
-    {
-      'name': 'dom tree',
-      'url': 'https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Using_the_W3C_DOM_Level_1_Core',
-    },
-  ];
-
-  return data;
-};
-
-const getNodeTerms = function() {
-  const data = [
-    {
-      'name': 'socket',
-      'url': 'https://en.wikipedia.org/wiki/Network_socket',
-    },
-    {
-      'name': 'module',
-      'url': 'https://nodejs.org/api/modules.html#modules_modules',
-    },
-    {
-      'name': 'io',
-      'url': 'http://www.onlamp.com/pub/a/python/2004/02/12/advanced_nio.html',
-    },
-    {
-      'name': 'blocking',
-      'url': 'https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/',
-    },
-    {
-      'name': 'non-blocking',
-      'url': 'https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/',
-    },
-    {
-      'name': 'v8',
-      'url': 'https://en.wikipedia.org/wiki/Chrome_V8',
-    },
-    {
-      'name': 'file system',
-      'url': 'https://nodejs.org/api/fs.html#fs_file_system',
-    },
-    {
-      'name': 'request',
-      'url': 'https://nodejs.org/api/http.html#http_class_http_clientrequest',
-    },
-  ];
-  return data;
-};
-
-const getDesignPatternTerms = function() {
-  const data = [
-    {
-      'name': 'factory',
-      'url': 'https://sourcemaking.com/design_patterns/factory_method',
-    },
-    {
-      'name': 'singleton',
-      'url': 'https://sourcemaking.com/design_patterns/singleton',
-    },
-    {
-      'name': 'observor',
-      'url': 'https://sourcemaking.com/design_patterns/observer',
-    },
-    {
-      'name': 'decorator',
-      'url': 'https://sourcemaking.com/design_patterns/decorator',
-    },
-    {
-      'name': 'prototype',
-      'url': 'https://sourcemaking.com/design_patterns/prototype',
-    },
-  ];
-  return data;
-};
-
 // return Promise from this method
 const getDataHash = function(currentContext = 'html') {
   const htmlTerms = getHtmlCssTerms();
   const nodejsTerms = getNodeTerms();
-
   const designPatterns = getDesignPatternTerms();
 
   const dataSet = {

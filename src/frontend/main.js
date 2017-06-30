@@ -184,7 +184,7 @@ const getSimpleList = function(plainText, formattedText) {
         </li>`;
 };
 
-const displayResult = function(data, resultContainer, searchInputElem, previousInput) {
+const displayResult = function(data, resultContainer, searchInputElem, previousInput, selectedResultElem) {
   if (data && data.length !== 0) {
     resultContainer.classList.add('active');
 
@@ -198,16 +198,18 @@ const displayResult = function(data, resultContainer, searchInputElem, previousI
       }
       resultContainer.innerHTML += listHTML;
     }
-    activateResultListItem(resultContainer, searchInputElem, previousInput);
+    activateResultListItem(resultContainer, searchInputElem, previousInput, selectedResultElem);
   } else {
+    selectedResultElem.classList.remove('selected');
     clearResult(resultContainer);
   }
 };
 
 /* clicking on the list item will cause it to be selected
 closing the completion list and fill the value. */
-const activateResultListItem = function(resultContainer, searchInputElem, previousInput) {
+const activateResultListItem = function(resultContainer, searchInputElem, previousInput, selectedResultElem) {
   const resultItems = document.querySelectorAll('.result-item');
+  const selectedLinkElem = selectedResultElem.querySelector('.external-link');
 
   for (let i = 0; i < resultItems.length; i++) {
     const resultItem = resultItems[i];
@@ -215,6 +217,7 @@ const activateResultListItem = function(resultContainer, searchInputElem, previo
     resultItem.addEventListener('mouseenter', function(event) {
       const target = event.currentTarget;
       const plainText = target.getAttribute('data-plain-text');
+      const dataUrl = target.getAttribute('data-url');
       const resultItems = document.querySelectorAll('.result-item');
       const resultLen = resultItems.length;
 
@@ -224,10 +227,12 @@ const activateResultListItem = function(resultContainer, searchInputElem, previo
       }
 
       searchInputElem.value = plainText;
+      selectedLinkElem.innerHTML = `<a href="${dataUrl}" target="_blank">🔗</a>`
       target.classList.add('highlight');
     });
 
     resultItem.addEventListener('click', function(event) {
+      selectedResultElem.classList.add('selected');
       clearResult(resultContainer);
     });
 
@@ -271,7 +276,7 @@ const activateContextListItem = function(contextContainer, currentContextElem, d
   }
 };
 
-const bindSearchEvents = function(inputElem, resultsElem, dataHash, previousInput) {
+const bindSearchEvents = function(inputElem, resultsElem, dataHash, previousInput, selectedResultElem) {
   inputElem.addEventListener('focusin', function(event) {
     inputElem.classList.add('active');
   });
@@ -298,12 +303,12 @@ const bindSearchEvents = function(inputElem, resultsElem, dataHash, previousInpu
     resultsElem.innerHTML = '';
 
     if (currentText.length === 0) {
-      return displayResult(null, resultsElem, inputElem);
+      return displayResult(null, resultsElem, inputElem, previousInput, selectedResultElem);
     }
 
     const results = getMatchedResult(currentText.toLowerCase(), dataHash);
 
-    return displayResult(results, resultsElem, inputElem, previousInput);
+    return displayResult(results, resultsElem, inputElem, previousInput, selectedResultElem);
   });
 };
 
@@ -396,6 +401,7 @@ const init = function() {
   const currentContextElem = document.getElementById('current_context');
   const searchInputElem = document.getElementById('search_input');
   const searchResultsElem = document.getElementById('search_results');
+  const selectedResultElem = document.getElementById('selected_result');
   // use this data to show default context on page?
   const defaultContext = 'html';
   // these two objects will be mudated
@@ -403,7 +409,7 @@ const init = function() {
   const previousInput = {value: ''};
 
   dataHashPromise.then((dataHash) => {
-    bindSearchEvents(searchInputElem, searchResultsElem, dataHash, previousInput);
+    bindSearchEvents(searchInputElem, searchResultsElem, dataHash, previousInput, selectedResultElem);
     bindContextEvents(contextContainerElem, currentContextElem, dataHash);
     searchInputElem.focus();
   });

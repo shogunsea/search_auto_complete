@@ -270,7 +270,7 @@ var getSimpleList = function getSimpleList(plainText, formattedText) {
   return '<li class="result-item" data-plain-text="' + plainText + '">\n          ' + formattedText + '\n        </li>';
 };
 
-var displayResult = function displayResult(data, resultContainer, searchInputElem, previousInput) {
+var displayResult = function displayResult(data, resultContainer, searchInputElem, previousInput, selectedResultElem) {
   if (data && data.length !== 0) {
     resultContainer.classList.add('active');
 
@@ -289,16 +289,18 @@ var displayResult = function displayResult(data, resultContainer, searchInputEle
       }
       resultContainer.innerHTML += listHTML;
     }
-    activateResultListItem(resultContainer, searchInputElem, previousInput);
+    activateResultListItem(resultContainer, searchInputElem, previousInput, selectedResultElem);
   } else {
+    selectedResultElem.classList.remove('selected');
     clearResult(resultContainer);
   }
 };
 
 /* clicking on the list item will cause it to be selected
 closing the completion list and fill the value. */
-var activateResultListItem = function activateResultListItem(resultContainer, searchInputElem, previousInput) {
+var activateResultListItem = function activateResultListItem(resultContainer, searchInputElem, previousInput, selectedResultElem) {
   var resultItems = document.querySelectorAll('.result-item');
+  var selectedLinkElem = selectedResultElem.querySelector('.external-link');
 
   for (var i = 0; i < resultItems.length; i++) {
     var resultItem = resultItems[i];
@@ -306,6 +308,7 @@ var activateResultListItem = function activateResultListItem(resultContainer, se
     resultItem.addEventListener('mouseenter', function (event) {
       var target = event.currentTarget;
       var plainText = target.getAttribute('data-plain-text');
+      var dataUrl = target.getAttribute('data-url');
       var resultItems = document.querySelectorAll('.result-item');
       var resultLen = resultItems.length;
 
@@ -315,10 +318,12 @@ var activateResultListItem = function activateResultListItem(resultContainer, se
       }
 
       searchInputElem.value = plainText;
+      selectedLinkElem.innerHTML = '<a href="' + dataUrl + '" target="_blank">\uD83D\uDD17</a>';
       target.classList.add('highlight');
     });
 
     resultItem.addEventListener('click', function (event) {
+      selectedResultElem.classList.add('selected');
       clearResult(resultContainer);
     });
 
@@ -364,7 +369,7 @@ var activateContextListItem = function activateContextListItem(contextContainer,
   }
 };
 
-var bindSearchEvents = function bindSearchEvents(inputElem, resultsElem, dataHash, previousInput) {
+var bindSearchEvents = function bindSearchEvents(inputElem, resultsElem, dataHash, previousInput, selectedResultElem) {
   inputElem.addEventListener('focusin', function (event) {
     inputElem.classList.add('active');
   });
@@ -391,12 +396,12 @@ var bindSearchEvents = function bindSearchEvents(inputElem, resultsElem, dataHas
     resultsElem.innerHTML = '';
 
     if (currentText.length === 0) {
-      return displayResult(null, resultsElem, inputElem);
+      return displayResult(null, resultsElem, inputElem, previousInput, selectedResultElem);
     }
 
     var results = getMatchedResult(currentText.toLowerCase(), dataHash);
 
-    return displayResult(results, resultsElem, inputElem, previousInput);
+    return displayResult(results, resultsElem, inputElem, previousInput, selectedResultElem);
   });
 };
 
@@ -491,6 +496,7 @@ var init = function init() {
   var currentContextElem = document.getElementById('current_context');
   var searchInputElem = document.getElementById('search_input');
   var searchResultsElem = document.getElementById('search_results');
+  var selectedResultElem = document.getElementById('selected_result');
   // use this data to show default context on page?
   var defaultContext = 'html';
   // these two objects will be mudated
@@ -498,7 +504,7 @@ var init = function init() {
   var previousInput = { value: '' };
 
   dataHashPromise.then(function (dataHash) {
-    bindSearchEvents(searchInputElem, searchResultsElem, dataHash, previousInput);
+    bindSearchEvents(searchInputElem, searchResultsElem, dataHash, previousInput, selectedResultElem);
     bindContextEvents(contextContainerElem, currentContextElem, dataHash);
     searchInputElem.focus();
   });

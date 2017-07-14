@@ -227,18 +227,13 @@ const activateResultListItem = function(resultContainer, searchInputElem, previo
       }
 
       searchInputElem.value = plainText;
-      selectedLinkElem.innerHTML = `<a href="${dataUrl}" target="_blank">🔗</a>`
+      selectedLinkElem.innerHTML = `<a href="${dataUrl}" target="_blank">🔗</a>`;
       target.classList.add('highlight');
     });
 
     resultItem.addEventListener('click', function(event) {
       selectedResultElem.classList.add('selected');
       clearResult(resultContainer);
-    });
-
-    // *** Element is selcted because mouseleave event won't be triggered! ***
-    resultItem.addEventListener('mouseleave', function(event) {
-      searchInputElem.value = previousInput.value;
     });
   }
 };
@@ -283,6 +278,7 @@ const bindSearchEvents = function(inputElem, resultsElem, dataHash, previousInpu
 
   inputElem.addEventListener('focusout', function(event) {
     inputElem.classList.remove('active');
+    clearResult(resultsElem);
   });
 
   // prevent the form submition when pressing enter key

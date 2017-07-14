@@ -326,11 +326,6 @@ var activateResultListItem = function activateResultListItem(resultContainer, se
       selectedResultElem.classList.add('selected');
       clearResult(resultContainer);
     });
-
-    // *** Element is selcted because mouseleave event won't be triggered! ***
-    resultItem.addEventListener('mouseleave', function (event) {
-      searchInputElem.value = previousInput.value;
-    });
   }
 };
 
@@ -376,6 +371,7 @@ var bindSearchEvents = function bindSearchEvents(inputElem, resultsElem, dataHas
 
   inputElem.addEventListener('focusout', function (event) {
     inputElem.classList.remove('active');
+    clearResult(resultsElem);
   });
 
   // prevent the form submition when pressing enter key

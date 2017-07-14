@@ -11,6 +11,6 @@
   "extends": ["eslint:recommended", "google"],
   "rules": {
     "no-console": "off",
-    "max-len": [2, 100, 4, { "ignoreStrings": true }]
+    "max-len": [2, 150, 4, { "ignoreStrings": true }]
   }
 }

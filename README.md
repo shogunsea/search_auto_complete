@@ -1,4 +1,4 @@
-# search_auto_complete [![CircleCI](https://circleci.com/gh/shogunsea/search_auto_complete/tree/master.svg?style=sheild)](https://circleci.com/gh/shogunsea/search_auto_complete/tree/master)
+# search_auto_complete [![CircleCI](https://circleci.com/gh/shogunsea/search_auto_complete/tree/master.svg?style=shield)](https://circleci.com/gh/shogunsea/search_auto_complete/tree/master)
 
 Live Demo [here](http://shogunsea.com/playground/search_auto_complete/)
 

@@ -1,4 +1,3 @@
-const {expect} = require('chai');
 const {getDataHash} = require('../../src/frontend/main');
 
 describe('#getDataHash', () => {
@@ -7,7 +6,7 @@ describe('#getDataHash', () => {
   });
 
   it('is a function', () => {
-    expect(typeof(getDataHash)).to.equal('function');
+    expect(typeof(getDataHash)).toBe('function');
   });
 });
 

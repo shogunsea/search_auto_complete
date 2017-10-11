@@ -5,7 +5,7 @@
 
 'use strict';
 
-const getHtmlCssTerms = require('./data_store/HTMLCSS');
+const getHtmlCssTerms = require('./data_store/htmlCss');
 const getNodeTerms = require('./data_store/node');
 const getDesignPatternTerms = require('./data_store/designPattern');
 

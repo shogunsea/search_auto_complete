@@ -4,7 +4,7 @@ module.exports = {
   entry: './src/frontend/main.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'public')
+    path: path.resolve(__dirname, './public/playground/search_auto_complete')
   },
   module: {
     rules: [

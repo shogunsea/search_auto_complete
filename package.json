@@ -7,7 +7,8 @@
     "lint": "./node_modules/eslint/bin/eslint.js --quiet --color ./src/**/*.js ./src/*.js; exit 0",
     "lintfix": "./node_modules/eslint/bin/eslint.js --quiet --color --fix ./src/**/*.js ./src/*.js; exit 0",
     "test": "jest",
-    "dev": "nodemon -e js --watch . ./src/server.js"
+    "dev": "nodemon -e js --watch . ./src/server.js",
+    "start": "NODE_PORT=8080 NODE_ENV=PROD node src/server"
   },
   "repository": {
     "type": "git",
@@ -47,7 +48,9 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-uglifycss": "^1.0.8",
+    "moment": "^2.20.1",
     "nodemon": "^1.11.0",
-    "run-sequence": "^1.2.2"
+    "run-sequence": "^1.2.2",
+    "twitter": "^1.7.1"
   }
 }

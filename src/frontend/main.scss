@@ -8,15 +8,6 @@ body {
   margin: 0px;
 }
 
-.spec {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 14em;
-  height: 10em;
-  background-color: #dadada;
-}
-
 .container {
   display: flex;
   flex-direction: row;
@@ -105,8 +96,6 @@ body {
       text-overflow: ellipsis;
     }
 
-
-
     &.highlight {
       background-color: rgb(238, 241, 247);
     }
@@ -144,6 +133,7 @@ body {
   border-top-left-radius: 0px;
   outline: none;
   transition: box-shadow 0.2s;
+  transition: font-size 0.2s;
 }
 
 #current_context {
@@ -158,8 +148,11 @@ body {
     background: no-repeat 100%;
     background-size: 36px 10px;
     background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgwIiBoZWlnaHQ9IjEzMCIgdmlld0JveD0iMCAwIDI0IDEzIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0xMi43MSAxMi43MDZMMjMuNzA2IDEuNzEyYTEuMDAzIDEuMDAzIDAgMCAwLTEuNDItMS40MThMMTIgMTAuNTc5IDEuNzEzLjI5NGExLjAwNCAxLjAwNCAwIDAgMC0xLjQyIDEuNDE4TDExLjI5IDEyLjcwNmExLjAwMyAxLjAwMyAwIDAgMCAxLjQyIDB6IiBmaWxsPSIjNTNBMzE4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg0K");
+    transition: transform 0.2s;
+
     #context_container.active & {
       transform: rotate(180deg);
+      transition: transform 0.2s;
     }
   }
 }
@@ -185,7 +178,8 @@ body {
 
 @media (max-width: 810px) {
   #context_container {
-    font-size: 0.5em
+    transition: font-size 0.2s;
+    font-size: 0.5em;
   }
 }
 

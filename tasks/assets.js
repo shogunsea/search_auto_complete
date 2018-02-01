@@ -9,11 +9,12 @@ const uglifycss = require('gulp-uglifycss');
 const {execSync} = require('child_process');
 
 const imgPattern = 'src/**/frontend/*.{ico,png}';
-const publicPath = './public';
+const targetPath = './public/playground/search_auto_complete';
 
-gulp.task('assets:clean', 'Clean up public folder', function() {
+
+gulp.task('assets:clean', 'Clean up targetPath folder', function() {
   return del([
-    publicPath,
+    targetPath,
   ]);
 });
 
@@ -28,7 +29,7 @@ gulp.task('assets:sass', 'Compile sass into css', function() {
       'maxLineLen': 80,
       'uglyComments': true,
     }))
-    .pipe(gulp.dest('./public'));
+    .pipe(gulp.dest(targetPath));
   }
 );
 
@@ -39,7 +40,7 @@ gulp.task('assets:move-img',
       .pipe(rename((path) => {
         path.dirname = path.dirname.replace('frontend', '');
       }))
-      .pipe(gulp.dest('./public'));
+      .pipe(gulp.dest(targetPath));
   }
 );
 

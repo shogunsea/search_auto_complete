@@ -4,6 +4,8 @@ const compression = require('compression');
 
 const app = express();
 
+const bootTwitterClient = require('./twitterClient');
+
 const publicPath = path.resolve(__dirname, '../public');
 
 const oneWeekInMsFormat = '7d';
@@ -13,15 +15,16 @@ const httpCachingOptions = {
 
 app.use(compression());
 app.use(express.static(publicPath, httpCachingOptions));
+bootTwitterClient(app);
 
-app.get('/', function(req, res) {
+app.get('/playground/search_auto_complete', function(req, res) {
   const indexFile = path.join(__dirname, './index.html');
   res.sendFile(indexFile);
 });
 
-const port = 3080;
+const PORT = process.env.NODE_PORT || 8083;
 
-app.listen(port, function() {
+app.listen(PORT, function() {
   console.log('yoooo!');
-  console.log('Demo page running on http://localhost:' + port);
+  console.log('Search auto complete running on http://localhost:' + PORT + '/playground/search_auto_complete');
 });

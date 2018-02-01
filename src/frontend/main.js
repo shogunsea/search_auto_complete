@@ -115,9 +115,9 @@ const toggleContextItems = function(allContextItems, selectedItem) {
 
 const clearResult = function(resultContainer) {
   setTimeout(function() {
-      resultContainer.classList.remove('active');
-      resultContainer.innerHTML = '';
-  }, 100);
+    resultContainer.classList.remove('active');
+    resultContainer.innerHTML = '';
+  }, 100); // why this setTimeout is needed
 };
 
 // not clearing innerHTML since dropdown list items
@@ -147,6 +147,7 @@ const getFormattedText = function(haystack, needle) {
 adfsdasdf, a --> highlight all occurances of 'a'
 helloworldhello, hello -> highlight all occurances of 'hello'
 helloworldhello, wor -> highlight 'wor' */
+
 const getMatchedResult = function(input, dataHash) {
   const results = [];
   const {dataSet, currentContext} = dataHash;
@@ -155,6 +156,10 @@ const getMatchedResult = function(input, dataHash) {
   if (!currentDataSet) {
     return results;
   }
+
+  // this doesn't scale at all..
+  // what if you have 1k entries in the data set?
+  // 1. if a match has to start from the very first word: then we can use trie here..?
 
   for (let data of currentDataSet) {
     const {name: plainText, count, url} = data;
@@ -191,11 +196,7 @@ const displayResult = function(data, resultContainer, searchInputElem, previousI
     for (let i = 0; i < data.length; i++) {
       const {formattedText, plainText, count, url} = data[i];
       let listHTML = '';
-      if (url) {
-        listHTML = getComplexList(plainText, formattedText, url, count);
-      } else {
-        listHTML = getSimpleList(plainText, formattedText);
-      }
+      listHTML = url? getComplexList(plainText, formattedText, url, count) : getSimpleList(plainText, formattedText);
       resultContainer.innerHTML += listHTML;
     }
     activateResultListItem(resultContainer, searchInputElem, previousInput, selectedResultElem);
@@ -247,6 +248,8 @@ const activateContextListItem = function(contextContainer, currentContextElem, d
   for (let i = 0; i < contextItems.length; i++) {
     const contextItem = contextItems[i];
     contextItem.addEventListener('click', function(event) {
+      // This is needed because its parent also has a click handler to toggle
+      // the context list. without
       event.stopPropagation();
 
       const target = event.currentTarget;
@@ -353,15 +356,13 @@ const fetchFromTwitterAPI = function() {
 
 // return Promise from this method
 const getDataHash = function(currentContext = 'html') {
-  const htmlTerms = getHtmlCssTerms();
-  const nodejsTerms = getNodeTerms();
-  const designPatterns = getDesignPatternTerms();
-
   const dataSet = {
-    html: htmlTerms,
-    node: nodejsTerms,
-    pattern: designPatterns,
+    html: getHtmlCssTerms(),
+    node: getNodeTerms(),
+    pattern: getDesignPatternTerms(),
   };
+
+  // kinda lazly init twitter trends: only make api call when context is twitter.
   const showTwitterTrends = currentContext === 'twitter';
 
   if (showTwitterTrends) {
@@ -379,6 +380,7 @@ const getDataHash = function(currentContext = 'html') {
       dataSet.twitter = parsedList;
       return {dataSet, currentContext: 'twitter'};
     }).catch((e) => {
+      console.log('Not able to fetch twitter trends data.');
       console.warn(e);
     });
   }
@@ -393,14 +395,14 @@ const init = function() {
     return;
   }
 
-  const contextContainerElem = document.getElementById('context_container');
-  const currentContextElem = document.getElementById('current_context');
-  const searchInputElem = document.getElementById('search_input');
-  const searchResultsElem = document.getElementById('search_results');
-  const selectedResultElem = document.getElementById('selected_result');
+  const contextContainerElem = document.querySelector('#context_container');
+  const currentContextElem = document.querySelector('#current_context');
+  const searchInputElem = document.querySelector('#search_input');
+  const searchResultsElem = document.querySelector('#search_results');
+  const selectedResultElem = document.querySelector('#selected_result');
   // use this data to show default context on page?
   const defaultContext = 'html';
-  // these two objects will be mudated
+  // these two objects will be mutated: candidate for store/state
   const dataHashPromise = getDataHash(defaultContext);
   const previousInput = {value: ''};
 

@@ -8,6 +8,12 @@
 const getHtmlCssTerms = require('./data_store/htmlCss');
 const getNodeTerms = require('./data_store/node');
 const getDesignPatternTerms = require('./data_store/designPattern');
+const externalLinkSVG = `
+<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+</svg>
+`;
 
 const dispatchKeyAction = function(event, inputElem, previousInput, resultContainer) {
   if (isNavAction(event)) {
@@ -178,7 +184,7 @@ const getComplexList = function(plainText, formattedText, url, count) {
               ${formattedText}
             </div>
             <div class="external-link">
-              <a href="${url}" target="_blank">🔗</a>
+              <a href="${url}" target="_blank">${externalLinkSVG}</a>
             </div>
         </li>`;
 };
@@ -228,7 +234,7 @@ const activateResultListItem = function(resultContainer, searchInputElem, previo
       }
 
       searchInputElem.value = plainText;
-      selectedLinkElem.innerHTML = `<a href="${dataUrl}" target="_blank">🔗</a>`;
+      selectedLinkElem.innerHTML = `<a href="${dataUrl}" target="_blank">${externalLinkSVG}</a>`;
       target.classList.add('highlight');
     });
 

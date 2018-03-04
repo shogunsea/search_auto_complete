@@ -56,6 +56,50 @@ const getHtmlCssTerms = function() {
       'name': 'dom tree',
       'url': 'https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Using_the_W3C_DOM_Level_1_Core',
     },
+    {
+      'name': 'elements',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element',
+    },
+    {
+      'name': 'label',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label',
+    },
+    {
+      'name': 'legend',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend',
+    },
+    {
+      'name': 'input',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input',
+    },
+    {
+      'name': 'optgroup',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup',
+    },
+    {
+      'name': 'option',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option',
+    },
+    {
+      'name': 'select',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select',
+    },
+    {
+      'name': 'textarea',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea',
+    },
+    {
+      'name': 'fieldset',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset',
+    },
+    {
+      'name': 'button',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button',
+    },
+    {
+      'name': 'form',
+      'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form',
+    },
   ];
 
   return data;

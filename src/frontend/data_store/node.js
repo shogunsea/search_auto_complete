@@ -31,6 +31,30 @@ const getNodeTerms = () => ([
     'name': 'request',
     'url': 'https://nodejs.org/api/http.html#http_class_http_clientrequest',
   },
+  {
+    'name': 'request',
+    'url': 'https://nodejs.org/api/http.html#http_class_http_clientrequest',
+  },
+  {
+    'name': 'buffer',
+    'url': 'https://nodejs.org/api/buffer.html',
+  },
+  {
+    'name': 'debugger',
+    'url': 'https://nodejs.org/api/debugger.html',
+  },
+  {
+    'name': 'event',
+    'url': 'https://nodejs.org/api/events.html',
+  },
+  {
+    'name': 'process',
+    'url': 'https://nodejs.org/api/process.html',
+  },
+  {
+    'name': 'stream',
+    'url': 'https://nodejs.org/api/stream.html',
+  },
 ]);
 
 module.exports = getNodeTerms;

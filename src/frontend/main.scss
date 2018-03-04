@@ -60,6 +60,8 @@ body {
   outline: none;
   font-size: 1em;
   transition: box-shadow 0.2s;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
   &.active {
     transition: box-shadow 0.2s;

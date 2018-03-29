@@ -2,14 +2,14 @@
 const Trie = require('./trie.js');
 
 describe('Trie', function() {
-  const dict = ['normal', 'trie', 'tree', 'try', 'norman', 'tesla'];
+  const dict = ['normal', 'trie', 'tree', 'try', 'norman', 'tesla', 'tr'];
   const queries = [
     {input: 'n', output: ['normal', 'norman']},
     {input: 'no', output: ['normal', 'norman']},
     {input: 'noo', output: []},
     {input: 's', output: []},
-    {input: 't', output: ['trie', 'tree', 'try', 'tesla']},
-    {input: 'tr', output: ['trie', 'tree', 'try']},
+    {input: 't', output: ['tr', 'trie', 'tree', 'try', 'tesla']},
+    {input: 'tr', output: ['tr', 'trie', 'tree', 'try']},
     {input: 'tri', output: ['trie']},
   ];
 

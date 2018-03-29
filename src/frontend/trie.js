@@ -22,6 +22,7 @@ class Node {
   constructor(val = '') {
     this.val = val;
     this.children = null; // nodes it connects to.
+    this.isEnding = false;
   }
   /**
    *
@@ -54,12 +55,16 @@ class Trie {
   constructor(wordsList) {
     this.root = new Node();
 
+
     for (let word of wordsList) {
       let runner = this.root;
-      for (let c of word) {
+      for (let i = 0; i < word.length; i++) {
+        const c = word[i];
         runner = runner.addNode(c);
       }
+      runner.isEnding = true;
     }
+
   }
   /**
    *
@@ -80,6 +85,8 @@ class Trie {
         break;
       }
     }
+
+    // hasMatch = hasMatch && runner.isEnding;
 
     // traverse down the tree to get all words.
     if (hasMatch) {
@@ -111,6 +118,10 @@ class Trie {
       const match = tempList.join('');
       resultList.push(match);
     } else {
+      if (node.isEnding) {
+        const match = tempList.join('');
+        resultList.push(match);
+      }
       for (let key in node.children) {
         if (node.children.hasOwnProperty(key)) {
           const child = node.children[key];
